@@ -4,485 +4,436 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Walk the World — Agencia de Viajes</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --navy: #0D2240;
-    --navy-mid: #1A3A6B;
-    --navy-light: #2E5FA3;
-    --gold: #C4973B;
-    --gold-light: #E8C06A;
-    --white: #FFFFFF;
-    --off-white: #F7F9FC;
-    --gray-100: #EEF1F6;
-    --gray-300: #BFC8D6;
-    --gray-500: #6B7A8D;
-    --gray-700: #374151;
-    --text: #1A2333;
-    --radius: 12px;
-    --radius-lg: 20px;
-  }
+:root {
+  --ink:       #080E1A;
+  --navy:      #0D1F3C;
+  --navy-mid:  #122847;
+  --navy-glow: #1A3A6B;
+  --gold:      #C4973B;
+  --gold-light:#E8C06A;
+  --gold-dim:  rgba(196,151,59,0.18);
+  --white:     #FFFFFF;
+  --off:       #F0EDE8;
+  --muted:     rgba(240,237,232,0.55);
+  --border:    rgba(196,151,59,0.22);
+  --r:         10px;
+  --r-lg:      18px;
+}
 
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--ink); color: var(--off); overflow-x: hidden; line-height: 1.6; }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    color: var(--text);
-    background: var(--white);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5%;
-    height: 68px;
-    background: rgba(255,255,255,0.97);
-    border-bottom: 1px solid var(--gray-100);
-    backdrop-filter: blur(8px);
-  }
-  .nav-logo {
-    display: flex; align-items: center; gap: 10px;
-    text-decoration: none;
-  }
-  .nav-logo-mark {
-    width: 38px; height: 38px;
-    background: var(--navy);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .nav-logo-mark svg { width: 22px; height: 22px; }
-  .nav-logo-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--navy);
-    line-height: 1.2;
-  }
-  .nav-logo-text span { display: block; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 400; color: var(--gray-500); letter-spacing: 0.08em; text-transform: uppercase; }
-  .nav-links { display: flex; align-items: center; gap: 32px; }
-  .nav-links a { font-size: 14px; color: var(--gray-700); text-decoration: none; font-weight: 400; transition: color .2s; }
-  .nav-links a:hover { color: var(--navy); }
-  .nav-cta {
-    background: var(--navy);
-    color: var(--white) !important;
-    padding: 9px 20px;
-    border-radius: 8px;
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    text-decoration: none;
-    display: flex; align-items: center; gap: 6px;
-    transition: background .2s;
-  }
-  .nav-cta:hover { background: var(--navy-mid) !important; color: var(--white) !important; }
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 66px;
+  background: rgba(8,14,26,0.88);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  transition: background .3s;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-mark {
+  width: 36px; height: 36px;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-logo-mark svg { width: 20px; height: 20px; }
+.nav-wordmark { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--white); line-height: 1.1; }
+.nav-wordmark small { display: block; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 400; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; transition: color .2s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold) !important;
+  padding: 8px 20px; border-radius: 6px;
+  font-size: 12px !important; font-weight: 500 !important;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 6px;
+  transition: background .2s, color .2s;
+}
+.nav-cta:hover { background: var(--gold) !important; color: var(--ink) !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--gold); border-radius: 2px; }
 
-  /* ── HERO ── */
-  .hero {
-    margin-top: 68px;
-    min-height: calc(100vh - 68px);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 0 5%;
-    gap: 60px;
-    background: var(--off-white);
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; top: -80px; right: -80px;
-    width: 480px; height: 480px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(46,95,163,0.07) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(196,151,59,0.12);
-    color: var(--gold);
-    font-size: 12px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 6px 14px; border-radius: 20px;
-    margin-bottom: 20px;
-  }
-  .hero-eyebrow span { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 4vw, 58px);
-    font-weight: 600;
-    color: var(--navy);
-    line-height: 1.15;
-    margin-bottom: 20px;
-  }
-  .hero-title em { font-style: italic; color: var(--navy-light); }
-  .hero-desc {
-    font-size: 17px; color: var(--gray-500);
-    line-height: 1.7; margin-bottom: 36px;
-    max-width: 460px;
-  }
-  .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--navy);
-    color: var(--white);
-    padding: 14px 28px;
-    border-radius: var(--radius);
-    font-size: 15px; font-weight: 500;
-    text-decoration: none;
-    display: inline-flex; align-items: center; gap: 8px;
-    transition: background .2s, transform .15s;
-  }
-  .btn-primary:hover { background: var(--navy-mid); transform: translateY(-1px); }
-  .btn-wa {
-    background: #25D366;
-    color: var(--white);
-    padding: 14px 28px;
-    border-radius: var(--radius);
-    font-size: 15px; font-weight: 500;
-    text-decoration: none;
-    display: inline-flex; align-items: center; gap: 8px;
-    transition: background .2s, transform .15s;
-  }
-  .btn-wa:hover { background: #1DAA55; transform: translateY(-1px); }
-  .hero-stats {
-    display: flex; gap: 32px; margin-top: 44px;
-    padding-top: 32px;
-    border-top: 1px solid var(--gray-300);
-  }
-  .hero-stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px; font-weight: 600; color: var(--navy);
-    line-height: 1;
-  }
-  .hero-stat-label { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 100px 5% 60px;
+  overflow: hidden;
+}
 
-  /* hero image collage */
-  .hero-visual {
-    position: relative;
-    height: 520px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 12px;
-  }
-  .hero-img {
-    border-radius: var(--radius);
-    overflow: hidden;
-    position: relative;
-  }
-  .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .hero-img:first-child { grid-row: 1 / 3; }
-  .img-label {
-    position: absolute; bottom: 12px; left: 12px;
-    background: rgba(13,34,64,0.82);
-    color: var(--white);
-    font-size: 12px; font-weight: 500;
-    padding: 5px 12px; border-radius: 20px;
-    backdrop-filter: blur(4px);
-  }
-  .hero-badge {
-    position: absolute; top: -12px; right: -12px;
-    background: var(--gold);
-    color: var(--white);
-    font-size: 11px; font-weight: 600;
-    padding: 10px 16px; border-radius: 50px;
-    text-align: center; line-height: 1.3;
-    box-shadow: 0 4px 12px rgba(196,151,59,0.35);
-    z-index: 2;
-  }
+/* full-bleed background image with dark overlay */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    linear-gradient(105deg, rgba(8,14,26,0.97) 0%, rgba(8,14,26,0.82) 45%, rgba(8,14,26,0.35) 100%),
+    url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1600&q=85') center/cover no-repeat;
+}
+/* golden light leak from right */
+.hero-bg::after {
+  content: '';
+  position: absolute; top: 10%; right: 0; width: 45%; height: 80%;
+  background: radial-gradient(ellipse at right center, rgba(196,151,59,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
 
-  /* ── DESTINOS ── */
-  .section { padding: 90px 5%; }
-  .section-alt { background: var(--off-white); }
+.hero-content { position: relative; z-index: 1; max-width: 600px; }
 
-  .section-header { text-align: center; margin-bottom: 56px; }
-  .section-eyebrow {
-    display: inline-block;
-    font-size: 12px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 3vw, 42px);
-    font-weight: 600;
-    color: var(--navy);
-    line-height: 1.2;
-  }
-  .section-sub { font-size: 16px; color: var(--gray-500); margin-top: 12px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border);
+  background: rgba(196,151,59,0.08);
+  color: var(--gold-light);
+  font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 20px;
+  margin-bottom: 28px;
+}
+.hero-tag-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; }
 
-  .destinos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .destino-card {
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--white);
-    border: 1px solid var(--gray-100);
-    transition: transform .25s, box-shadow .25s;
-    cursor: pointer;
-  }
-  .destino-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(13,34,64,0.12); }
-  .destino-img {
-    height: 220px;
-    overflow: hidden;
-    position: relative;
-  }
-  .destino-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
-  .destino-card:hover .destino-img img { transform: scale(1.05); }
-  .destino-region {
-    position: absolute; top: 14px; left: 14px;
-    background: var(--gold);
-    color: var(--white);
-    font-size: 11px; font-weight: 600;
-    padding: 4px 12px; border-radius: 20px;
-    text-transform: uppercase; letter-spacing: 0.06em;
-  }
-  .destino-body { padding: 20px; }
-  .destino-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px; font-weight: 600;
-    color: var(--navy); margin-bottom: 6px;
-  }
-  .destino-desc { font-size: 14px; color: var(--gray-500); line-height: 1.6; margin-bottom: 16px; }
-  .destino-meta { display: flex; gap: 16px; flex-wrap: wrap; }
-  .destino-tag {
-    font-size: 12px; color: var(--navy-light);
-    background: rgba(46,95,163,0.08);
-    padding: 4px 10px; border-radius: 6px;
-    display: flex; align-items: center; gap: 4px;
-  }
-  .destino-footer {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 20px;
-    border-top: 1px solid var(--gray-100);
-  }
-  .destino-price { font-size: 13px; color: var(--gray-500); }
-  .destino-price strong { font-size: 20px; color: var(--navy); font-weight: 600; display: block; line-height: 1; }
-  .destino-price strong span { font-size: 13px; font-weight: 400; }
-  .destino-btn {
-    background: var(--navy);
-    color: var(--white);
-    font-size: 13px; font-weight: 500;
-    padding: 9px 18px; border-radius: 8px;
-    text-decoration: none;
-    transition: background .2s;
-    white-space: nowrap;
-  }
-  .destino-btn:hover { background: var(--navy-mid); }
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(46px, 6vw, 82px);
+  font-weight: 600; line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.hero-title em { font-style: italic; color: var(--gold-light); display: block; }
 
-  /* ── POR QUÉ NOSOTROS ── */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
-  }
-  .feature-card {
-    background: var(--white);
-    border: 1px solid var(--gray-100);
-    border-radius: var(--radius-lg);
-    padding: 28px 24px;
-    transition: transform .2s;
-  }
-  .feature-card:hover { transform: translateY(-4px); }
-  .feature-icon {
-    width: 48px; height: 48px;
-    background: rgba(13,34,64,0.06);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 16px;
-    font-size: 22px;
-  }
-  .feature-title { font-size: 16px; font-weight: 500; color: var(--navy); margin-bottom: 8px; }
-  .feature-desc { font-size: 14px; color: var(--gray-500); line-height: 1.65; }
+.hero-sub {
+  font-size: 16px; color: var(--muted); line-height: 1.75;
+  margin-bottom: 40px; max-width: 460px;
+  font-weight: 300;
+}
 
-  /* ── TESTIMONIOS ── */
-  .reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-  }
-  .review-card {
-    background: var(--white);
-    border: 1px solid var(--gray-100);
-    border-radius: var(--radius-lg);
-    padding: 24px;
-  }
-  .review-stars { color: var(--gold); font-size: 16px; margin-bottom: 12px; }
-  .review-text { font-size: 15px; color: var(--gray-700); line-height: 1.7; margin-bottom: 16px; font-style: italic; }
-  .review-author { display: flex; align-items: center; gap: 10px; }
-  .review-avatar {
-    width: 38px; height: 38px; border-radius: 50%;
-    background: var(--navy);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 500; color: var(--white);
-  }
-  .review-name { font-size: 14px; font-weight: 500; color: var(--navy); }
-  .review-date { font-size: 12px; color: var(--gray-500); }
+.hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 
-  /* ── CONTACTO ── */
-  .contact-wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
-  }
-  .contact-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px; font-weight: 600; color: var(--navy);
-    margin-bottom: 14px; line-height: 1.2;
-  }
-  .contact-info p { font-size: 16px; color: var(--gray-500); margin-bottom: 32px; }
-  .contact-item {
-    display: flex; align-items: flex-start; gap: 14px;
-    margin-bottom: 20px;
-  }
-  .contact-icon {
-    width: 42px; height: 42px; flex-shrink: 0;
-    background: rgba(13,34,64,0.06); border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .contact-label { font-size: 12px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
-  .contact-val { font-size: 15px; font-weight: 500; color: var(--navy); }
-  .contact-val a { color: var(--navy); text-decoration: none; }
-  .contact-val a:hover { color: var(--navy-light); }
+.btn-gold {
+  background: var(--gold);
+  color: var(--ink);
+  padding: 14px 30px; border-radius: 8px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 4px 20px rgba(196,151,59,0.3);
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(196,151,59,0.4); }
 
-  form { display: flex; flex-direction: column; gap: 16px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  label { font-size: 13px; font-weight: 500; color: var(--gray-700); display: block; margin-bottom: 6px; }
-  input, select, textarea {
-    width: 100%; padding: 11px 14px;
-    border: 1px solid var(--gray-300);
-    border-radius: 8px;
-    font-size: 14px; color: var(--text);
-    background: var(--white);
-    font-family: 'Inter', sans-serif;
-    transition: border-color .2s, box-shadow .2s;
-    outline: none;
-  }
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--navy-light);
-    box-shadow: 0 0 0 3px rgba(46,95,163,0.12);
-  }
-  textarea { resize: vertical; min-height: 110px; }
-  .btn-submit {
-    background: var(--navy); color: var(--white);
-    padding: 13px 28px; border-radius: 10px;
-    font-size: 15px; font-weight: 500;
-    border: none; cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    transition: background .2s, transform .15s;
-  }
-  .btn-submit:hover { background: var(--navy-mid); transform: translateY(-1px); }
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(240,237,232,0.3);
+  color: var(--off);
+  padding: 14px 28px; border-radius: 8px;
+  font-size: 13px; font-weight: 400; letter-spacing: 0.04em;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: border-color .2s, color .2s;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--navy);
-    color: rgba(255,255,255,0.7);
-    padding: 60px 5% 32px;
-  }
-  .footer-top {
-    display: grid;
-    grid-template-columns: 1.8fr 1fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 48px;
-  }
-  .footer-brand { }
-  .footer-logo {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 16px;
-  }
-  .footer-logo-mark {
-    width: 36px; height: 36px;
-    background: rgba(255,255,255,0.12);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .footer-logo-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px; font-weight: 600;
-    color: var(--white); line-height: 1.1;
-  }
-  .footer-logo-text small { display: block; font-family: 'Inter', sans-serif; font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; }
-  .footer-desc { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 240px; }
-  .footer-col h4 { font-size: 13px; font-weight: 500; color: var(--white); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px; }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .footer-col ul li a { font-size: 14px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .2s; }
-  .footer-col ul li a:hover { color: var(--white); }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.12);
-    padding-top: 24px;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 12px;
-  }
-  .footer-copy { font-size: 13px; color: rgba(255,255,255,0.4); }
-  .footer-socials { display: flex; gap: 12px; }
-  .footer-socials a {
-    width: 34px; height: 34px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    text-decoration: none; font-size: 16px;
-    transition: background .2s;
-  }
-  .footer-socials a:hover { background: rgba(255,255,255,0.18); }
+.btn-wa {
+  background: #25D366; color: var(--white);
+  padding: 14px 28px; border-radius: 8px;
+  font-size: 13px; font-weight: 500;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background .2s, transform .15s;
+}
+.btn-wa:hover { background: #1DAA55; transform: translateY(-2px); }
 
-  /* ── WHATSAPP FLOAT ── */
-  .wa-float {
-    position: fixed; bottom: 28px; right: 28px; z-index: 200;
-    width: 58px; height: 58px;
-    background: #25D366;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    text-decoration: none;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.45);
-    transition: transform .2s, box-shadow .2s;
-  }
-  .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
-  .wa-float svg { width: 30px; height: 30px; }
-  .wa-tooltip {
-    position: absolute; right: 70px; top: 50%;
-    transform: translateY(-50%);
-    background: var(--navy);
-    color: var(--white);
-    font-size: 13px; font-weight: 500;
-    padding: 8px 14px; border-radius: 8px;
-    white-space: nowrap;
-    opacity: 0; pointer-events: none;
-    transition: opacity .2s;
-  }
-  .wa-float:hover .wa-tooltip { opacity: 1; }
+.hero-divider { width: 60px; height: 1px; background: var(--gold); margin: 44px 0 32px; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .nav-links { display: none; }
-    .hamburger { display: flex; }
-    .hero { grid-template-columns: 1fr; padding-top: 40px; min-height: auto; }
-    .hero-visual { height: 300px; }
-    .destinos-grid { grid-template-columns: 1fr; }
-    .contact-wrap { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 600px) {
-    .footer-top { grid-template-columns: 1fr; }
-    .hero-stats { flex-wrap: wrap; gap: 20px; }
-    .hero-badge { display: none; }
-  }
+.hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px; font-weight: 600; color: var(--gold-light); line-height: 1;
+}
+.stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
 
-  /* scroll fade-in */
-  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
+/* floating destination cards on hero right */
+.hero-cards {
+  position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+  z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  width: min(44%, 520px);
+}
+.hero-card {
+  border-radius: var(--r-lg); overflow: hidden;
+  position: relative; aspect-ratio: 3/4;
+  border: 1px solid var(--border);
+}
+.hero-card:first-child { grid-row: 1 / 3; aspect-ratio: auto; }
+.hero-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-card-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 28px 14px 14px;
+  background: linear-gradient(to top, rgba(8,14,26,0.92) 0%, transparent 100%);
+  font-size: 13px; font-weight: 500; color: var(--white);
+  letter-spacing: 0.04em;
+}
+.hero-card-label span { display: block; font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+
+/* ── SECTION BASE ── */
+.section { padding: 90px 5%; }
+.section-dark { background: var(--ink); }
+.section-navy { background: var(--navy); }
+
+.section-header { text-align: center; margin-bottom: 60px; }
+.eyebrow {
+  display: inline-block;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 600; color: var(--white); line-height: 1.1;
+}
+.section-title em { font-style: italic; color: var(--gold-light); }
+.section-sub { font-size: 15px; color: var(--muted); margin-top: 14px; max-width: 500px; margin-left: auto; margin-right: auto; font-weight: 300; }
+
+/* ── DESTINOS ── */
+.destinos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.destino-card {
+  background: var(--navy-mid);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+  cursor: pointer;
+}
+.destino-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(196,151,59,0.4);
+  border-color: rgba(196,151,59,0.5);
+}
+.destino-img { height: 210px; overflow: hidden; position: relative; }
+.destino-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; display: block; }
+.destino-card:hover .destino-img img { transform: scale(1.06); }
+.destino-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,14,26,0.7) 0%, transparent 50%);
+}
+.destino-region {
+  position: absolute; top: 12px; left: 12px; z-index: 1;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px;
+}
+.destino-body { padding: 18px 18px 14px; }
+.destino-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 600; color: var(--white); margin-bottom: 6px; line-height: 1.2;
+}
+.destino-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; font-weight: 300; }
+.destino-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+.destino-tag {
+  font-size: 11px; color: var(--gold-light);
+  background: var(--gold-dim);
+  border: 1px solid var(--border);
+  padding: 3px 9px; border-radius: 5px;
+}
+.destino-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 18px;
+  border-top: 1px solid var(--border);
+}
+.destino-price { font-size: 12px; color: var(--muted); }
+.destino-price strong { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--gold-light); font-weight: 600; display: block; line-height: 1; }
+.destino-price strong span { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--gold); font-weight: 400; }
+.destino-btn {
+  background: transparent; border: 1px solid var(--gold);
+  color: var(--gold); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 8px 16px; border-radius: 6px;
+  text-decoration: none;
+  transition: background .2s, color .2s;
+  white-space: nowrap;
+}
+.destino-btn:hover { background: var(--gold); color: var(--ink); }
+.destino-extra { display: none; }
+
+/* ── FEATURES ── */
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.feature-card {
+  background: var(--navy-mid);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 28px 22px;
+  transition: border-color .2s, transform .2s;
+}
+.feature-card:hover { border-color: rgba(196,151,59,0.5); transform: translateY(-3px); }
+.feature-icon { font-size: 26px; margin-bottom: 14px; }
+.feature-title { font-size: 15px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
+.feature-desc { font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+/* ── REVIEWS ── */
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.review-card {
+  background: var(--navy-mid);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 24px;
+}
+.review-stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
+.review-text { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 18px; font-style: italic; font-weight: 300; }
+.review-author { display: flex; align-items: center; gap: 10px; }
+.review-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--gold-dim); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 500; color: var(--gold);
+}
+.review-name { font-size: 13px; font-weight: 500; color: var(--white); }
+.review-date { font-size: 11px; color: var(--muted); }
+
+/* ── CONTACT ── */
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.contact-info h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px; font-weight: 600; color: var(--white); margin-bottom: 12px; line-height: 1.15;
+}
+.contact-info p { font-size: 15px; color: var(--muted); margin-bottom: 32px; font-weight: 300; }
+.contact-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+.contact-icon {
+  width: 40px; height: 40px; flex-shrink: 0;
+  background: var(--gold-dim); border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 17px;
+}
+.contact-label { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+.contact-val { font-size: 14px; font-weight: 500; color: var(--white); }
+.contact-val a { color: var(--white); text-decoration: none; transition: color .2s; }
+.contact-val a:hover { color: var(--gold); }
+
+form { display: flex; flex-direction: column; gap: 14px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+label { font-size: 11px; font-weight: 500; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px; }
+input, select, textarea {
+  width: 100%; padding: 11px 14px;
+  background: var(--navy-mid);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px; color: var(--white);
+  font-family: 'Inter', sans-serif;
+  outline: none; transition: border-color .2s, box-shadow .2s;
+}
+input::placeholder, textarea::placeholder { color: var(--muted); }
+select option { background: var(--navy); }
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(196,151,59,0.12);
+}
+textarea { resize: vertical; min-height: 100px; }
+.btn-submit {
+  background: var(--gold); color: var(--ink);
+  padding: 13px 28px; border-radius: 8px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 4px 18px rgba(196,151,59,0.3);
+  transition: background .2s, transform .15s;
+}
+.btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+.form-note { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* gold line divider */
+.gold-line {
+  width: 100%; height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 0;
+}
+
+/* ── FOOTER ── */
+footer { background: var(--ink); padding: 60px 5% 28px; border-top: 1px solid var(--border); }
+.footer-top { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+.footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; text-decoration: none; }
+.footer-logo-mark {
+  width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.footer-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--white); line-height: 1.1; }
+.footer-logo-text small { display: block; font-family: 'Inter', sans-serif; font-size: 9px; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; }
+.footer-desc { font-size: 13px; color: var(--muted); line-height: 1.7; max-width: 230px; font-weight: 300; }
+.footer-col h4 { font-size: 10px; font-weight: 500; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 16px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color .2s; }
+.footer-col ul li a:hover { color: var(--gold); }
+.footer-bottom {
+  border-top: 1px solid var(--border); padding-top: 22px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.footer-copy { font-size: 12px; color: var(--muted); }
+.footer-socials { display: flex; gap: 10px; }
+.footer-socials a {
+  width: 32px; height: 32px;
+  border: 1px solid var(--border); border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; font-size: 14px;
+  transition: border-color .2s, background .2s;
+}
+.footer-socials a:hover { border-color: var(--gold); background: var(--gold-dim); }
+
+/* ── WA FLOAT ── */
+.wa-float {
+  position: fixed; bottom: 26px; right: 26px; z-index: 300;
+  width: 54px; height: 54px; background: #25D366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  transition: transform .2s, box-shadow .2s;
+}
+.wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+.wa-float svg { width: 28px; height: 28px; }
+.wa-tooltip {
+  position: absolute; right: 64px; top: 50%; transform: translateY(-50%);
+  background: var(--navy); border: 1px solid var(--border);
+  color: var(--white); font-size: 12px; font-weight: 500;
+  padding: 7px 12px; border-radius: 7px; white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.wa-float:hover .wa-tooltip { opacity: 1; }
+
+/* ── FADE UP ── */
+.fade-up { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .hero-cards { display: none; }
+  .hero-bg { background:
+    linear-gradient(180deg, rgba(8,14,26,0.95) 0%, rgba(8,14,26,0.75) 100%),
+    url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1200&q=80') center/cover no-repeat; }
+  .destinos-grid { grid-template-columns: 1fr; }
+  .contact-wrap { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+@media (max-width: 600px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .hero-stats { gap: 24px; }
+  .hero-title { font-size: 42px; }
+}
 </style>
 </head>
 <body>
@@ -491,405 +442,287 @@
 <nav>
   <a class="nav-logo" href="#">
     <div class="nav-logo-mark">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#C4973B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10"/>
         <line x1="2" y1="12" x2="22" y2="12"/>
         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
       </svg>
     </div>
-    <div class="nav-logo-text">Walk the World <span>Agencia de viajes</span></div>
+    <div class="nav-wordmark">Walk the World <small>Agencia de viajes</small></div>
   </a>
   <div class="nav-links">
     <a href="#destinos">Destinos</a>
     <a href="#nosotros">Nosotros</a>
     <a href="#opiniones">Opiniones</a>
     <a href="#contacto">Contacto</a>
-    <a class="nav-cta" href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20información%20sobre%20sus%20paquetes%20de%20viaje">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.554 4.103 1.524 5.83L0 24l6.338-1.499A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.007-1.371l-.36-.213-3.727.881.895-3.636-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+    <a class="nav-cta" href="https://wa.me/5215562513777?text=Hola%2C%20quiero%20información%20sobre%20paquetes" target="_blank" rel="noopener">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.554 4.103 1.524 5.83L0 24l6.338-1.499A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.007-1.371l-.36-.213-3.727.881.895-3.636-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
       WhatsApp
     </a>
   </div>
-  <button class="hamburger" aria-label="Menú" onclick="document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex'">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="hamburger" aria-label="Menú" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow"><span></span> Agencia verificada · 5.0 en Google</div>
-    <h1 class="hero-title">Viaja al mundo,<br><em>sin preocupaciones.</em></h1>
-    <p class="hero-desc">Diseñamos tu experiencia de viaje a la medida: Europa, Asia, el Caribe y más. Paquetes completos con vuelos, hotel, traslados y guía desde México.</p>
+    <div class="hero-tag"><span class="hero-tag-dot"></span> Agencia verificada · 5.0 en Google</div>
+    <h1 class="hero-title">
+      El mundo<br>te espera,
+      <em>sin límites.</em>
+    </h1>
+    <p class="hero-sub">Diseñamos viajes a la medida desde México: Europa, Asia, el Caribe y más. Todo incluido, salidas garantizadas y soporte en cada paso.</p>
     <div class="hero-actions">
-      <a href="#destinos" class="btn-primary">Ver destinos</a>
-      <a href="https://wa.me/5215562513777?text=Hola%2C%20quiero%20información%20sobre%20paquetes%20de%20viaje" class="btn-wa" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.554 4.103 1.524 5.83L0 24l6.338-1.499A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.007-1.371l-.36-.213-3.727.881.895-3.636-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-        Cotiza por WhatsApp
+      <a href="#destinos" class="btn-gold">Ver destinos</a>
+      <a href="https://wa.me/5215562513777?text=Hola%2C%20quiero%20cotizar%20un%20viaje" class="btn-wa" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.554 4.103 1.524 5.83L0 24l6.338-1.499A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.007-1.371l-.36-.213-3.727.881.895-3.636-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+        Cotizar por WhatsApp
       </a>
     </div>
+    <div class="hero-divider"></div>
     <div class="hero-stats">
-      <div>
-        <div class="hero-stat-num">5.0</div>
-        <div class="hero-stat-label">Calificación Google</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">+50</div>
-        <div class="hero-stat-label">Destinos disponibles</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">100%</div>
-        <div class="hero-stat-label">Clientes satisfechos</div>
-      </div>
+      <div><div class="stat-num">5.0</div><div class="stat-label">Calificación Google</div></div>
+      <div><div class="stat-num">+50</div><div class="stat-label">Destinos disponibles</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-label">Clientes satisfechos</div></div>
     </div>
   </div>
 
-  <div class="hero-visual fade-up" style="opacity:1; transform:none;">
-    <div class="hero-badge">Salidas<br>2026</div>
-    <div class="hero-img">
-      <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80" alt="París, Europa" loading="lazy">
-      <div class="img-label">París · Europa</div>
+  <!-- floating cards -->
+  <div class="hero-cards">
+    <div class="hero-card">
+      <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80" alt="París">
+      <div class="hero-card-label"><span>Europa</span>París & Roma</div>
     </div>
-    <div class="hero-img">
-      <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&q=80" alt="Tokio, Japón" loading="lazy">
-      <div class="img-label">Tokio · Japón</div>
+    <div class="hero-card">
+      <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&q=80" alt="Tokio">
+      <div class="hero-card-label"><span>Asia</span>Tokio</div>
     </div>
-    <div class="hero-img">
-      <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=400&q=80" alt="Punta Cana, Caribe" loading="lazy">
-      <div class="img-label">Punta Cana · Caribe</div>
+    <div class="hero-card">
+      <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=400&q=80" alt="Caribe">
+      <div class="hero-card-label"><span>Caribe</span>Punta Cana</div>
     </div>
   </div>
 </section>
 
-<!-- DESTINOS -->
-<section id="destinos" class="section">
-  <div class="section-header fade-up">
-    <div class="section-eyebrow">Paquetes 2026</div>
-    <h2 class="section-title">Destinos más solicitados</h2>
-    <p class="section-sub">Paquetes all-inclusive desde Ciudad de México, con todo incluido y salidas garantizadas.</p>
-  </div>
+<div class="gold-line"></div>
 
+<!-- DESTINOS -->
+<section id="destinos" class="section section-navy">
+  <div class="section-header fade-up">
+    <div class="eyebrow">Paquetes 2026</div>
+    <h2 class="section-title">Destinos más <em>solicitados</em></h2>
+    <p class="section-sub">Paquetes completos desde México con vuelo, hotel, traslados y guía incluidos.</p>
+  </div>
   <div class="destinos-grid">
 
     <div class="destino-card fade-up">
-      <div class="destino-img">
-        <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80" alt="Europa Mágica" loading="lazy">
-        <div class="destino-region">Europa</div>
-      </div>
+      <div class="destino-img"><img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80" alt="Europa Mágica" loading="lazy"><div class="destino-region">Europa</div></div>
       <div class="destino-body">
         <div class="destino-name">Europa Mágica</div>
-        <div class="destino-desc">París, Londres, Luxemburgo, Frankfurt, Roma, Venecia, Florencia y Barcelona en un solo viaje inolvidable.</div>
-        <div class="destino-meta">
-          <span class="destino-tag">🌙 17 noches</span>
-          <span class="destino-tag">✈️ Vuelo incluido</span>
-          <span class="destino-tag">🍽️ Desayunos</span>
-        </div>
+        <div class="destino-desc">París, Londres, Luxemburgo, Frankfurt, Roma, Venecia, Florencia y Barcelona en un solo viaje.</div>
+        <div class="destino-meta"><span class="destino-tag">🌙 17 noches</span><span class="destino-tag">✈️ Vuelo incluido</span><span class="destino-tag">🍽️ Desayunos</span></div>
       </div>
       <div class="destino-footer">
-        <div class="destino-price">
-          <strong>$1,999 <span>USD</span></strong>
-          + $899 USD imp.
-        </div>
+        <div class="destino-price"><strong>$1,999 <span>USD</span></strong>+ $899 USD imp.</div>
         <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Europa%20Mágica" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
 
     <div class="destino-card fade-up">
-      <div class="destino-img">
-        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80" alt="Japón 2026" loading="lazy">
-        <div class="destino-region">Asia</div>
-      </div>
+      <div class="destino-img"><img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80" alt="Japón 2026" loading="lazy"><div class="destino-region">Asia</div></div>
       <div class="destino-body">
         <div class="destino-name">Japón 2026</div>
-        <div class="destino-desc">Tokio, Kioto, Osaka, Nara y Hiroshima. Cultura, gastronomía y tecnología en el país del sol naciente.</div>
-        <div class="destino-meta">
-          <span class="destino-tag">🌙 14 noches</span>
-          <span class="destino-tag">✈️ Vuelo incluido</span>
-          <span class="destino-tag">🚄 Tren bala</span>
-        </div>
+        <div class="destino-desc">Tokio, Kioto, Osaka, Nara e Hiroshima. Cultura, gastronomía y tecnología en el país del sol naciente.</div>
+        <div class="destino-meta"><span class="destino-tag">🌙 14 noches</span><span class="destino-tag">✈️ Vuelo incluido</span><span class="destino-tag">🚄 Tren bala</span></div>
       </div>
       <div class="destino-footer">
-        <div class="destino-price">
-          <strong>$1,799 <span>USD</span></strong>
-          + $399 USD imp.
-        </div>
+        <div class="destino-price"><strong>$1,799 <span>USD</span></strong>+ $399 USD imp.</div>
         <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Japón%202026" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
 
     <div class="destino-card fade-up">
-      <div class="destino-img">
-        <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80" alt="Punta Cana y Santo Domingo" loading="lazy">
-        <div class="destino-region">Caribe</div>
-      </div>
+      <div class="destino-img"><img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80" alt="Punta Cana" loading="lazy"><div class="destino-region">Caribe</div></div>
       <div class="destino-body">
         <div class="destino-name">Punta Cana y Santo Domingo</div>
-        <div class="destino-desc">Playas de arena blanca, todo incluido y la magia del Caribe dominicano en el paquete más popular del año.</div>
-        <div class="destino-meta">
-          <span class="destino-tag">🌙 7 noches</span>
-          <span class="destino-tag">✈️ Vuelo incluido</span>
-          <span class="destino-tag">🏖️ Todo incluido</span>
-        </div>
+        <div class="destino-desc">Playas de arena blanca, todo incluido y la magia del Caribe dominicano.</div>
+        <div class="destino-meta"><span class="destino-tag">🌙 7 noches</span><span class="destino-tag">✈️ Vuelo incluido</span><span class="destino-tag">🏖️ Todo incluido</span></div>
       </div>
       <div class="destino-footer">
-        <div class="destino-price">
-          <strong>$899 <span>USD</span></strong>
-          + $399 USD imp.
-        </div>
+        <div class="destino-price"><strong>$899 <span>USD</span></strong>+ $399 USD imp.</div>
         <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Punta%20Cana" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
 
-    <div class="destino-card fade-up destino-extra" style="display:none">
-      <div class="destino-img">
-        <img src="https://images.unsplash.com/photo-1568632234157-ce7aecd03d0d?w=600&q=80" alt="Colombia Multicultural" loading="lazy">
-        <div class="destino-region">Latinoamérica</div>
-      </div>
+    <!-- EXTRAS -->
+    <div class="destino-card destino-extra fade-up">
+      <div class="destino-img"><img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80" alt="Colombia" loading="lazy"><div class="destino-region">Latinoamérica</div></div>
       <div class="destino-body">
         <div class="destino-name">Colombia Multicultural</div>
-        <div class="destino-desc">Bogotá, Cartagena y Medellín. Ciudad colonial, color caribeño y la calidez de la eterna primavera.</div>
-        <div class="destino-meta">
-          <span class="destino-tag">🌙 10 noches</span>
-          <span class="destino-tag">✈️ Vuelo incluido</span>
-          <span class="destino-tag">🗣️ Guía en español</span>
-        </div>
+        <div class="destino-desc">Bogotá, Cartagena y Medellín. Historia, cultura y paisajes que enamoran.</div>
+        <div class="destino-meta"><span class="destino-tag">🌙 10 noches</span><span class="destino-tag">✈️ Vuelo incluido</span><span class="destino-tag">🗣️ Guía en español</span></div>
       </div>
       <div class="destino-footer">
-        <div class="destino-price">
-          <strong>$1,499 <span>USD</span></strong>
-          + $399 USD imp.
-        </div>
-        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Colombia%20Multicultural" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
+        <div class="destino-price"><strong>$1,499 <span>USD</span></strong>+ $399 USD imp.</div>
+        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Colombia" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
 
-    <div class="destino-card fade-up destino-extra" style="display:none">
-      <div class="destino-img">
-        <img src="https://images.unsplash.com/photo-1570214476695-19bd467e6f7a?w=600&q=80" alt="Turquía con Crucero en Grecia" loading="lazy">
-        <div class="destino-region">Europa/Asia</div>
-      </div>
+    <div class="destino-card destino-extra fade-up">
+      <div class="destino-img"><img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=600&q=80" alt="Turquía" loading="lazy"><div class="destino-region">Europa/Asia</div></div>
       <div class="destino-body">
         <div class="destino-name">Turquía con Crucero en Grecia</div>
-        <div class="destino-desc">Estambul, Capadocia, Santorini y Atenas. Globos al amanecer y un crucero por las islas griegas.</div>
-        <div class="destino-meta">
-          <span class="destino-tag">🌙 17 noches</span>
-          <span class="destino-tag">✈️ Vuelo incluido</span>
-          <span class="destino-tag">🚢 Crucero incluido</span>
-        </div>
+        <div class="destino-desc">Estambul, Capadocia, Santorini y Atenas. Oriente y Occidente en un solo viaje.</div>
+        <div class="destino-meta"><span class="destino-tag">🌙 17 noches</span><span class="destino-tag">✈️ Vuelo incluido</span><span class="destino-tag">🚢 Crucero incluido</span></div>
       </div>
       <div class="destino-footer">
-        <div class="destino-price">
-          <strong>$1,199 <span>USD</span></strong>
-          + $499 USD imp.
-        </div>
-        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Turquía%20con%20Crucero%20en%20Grecia" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
+        <div class="destino-price"><strong>$1,199 <span>USD</span></strong>+ $499 USD imp.</div>
+        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Turquía" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
 
-    <div class="destino-card fade-up destino-extra" style="display:none">
-      <div class="destino-img">
-        <img src="https://images.unsplash.com/photo-1539768942893-daf53e448371?w=600&q=80" alt="Egipto Faraónico" loading="lazy">
-        <div class="destino-region">África</div>
-      </div>
+    <div class="destino-card destino-extra fade-up">
+      <div class="destino-img"><img src="https://images.unsplash.com/photo-1539768942893-daf53e448371?w=600&q=80" alt="Egipto" loading="lazy"><div class="destino-region">África</div></div>
       <div class="destino-body">
         <div class="destino-name">Egipto Faraónico</div>
-        <div class="destino-desc">El Cairo, Pirámides, Luxor y Aswan. Historia milenaria y un crucero navegando el río Nilo.</div>
-        <div class="destino-meta">
-          <span class="destino-tag">🌙 13 noches</span>
-          <span class="destino-tag">✈️ Vuelo incluido</span>
-          <span class="destino-tag">🚢 Crucero por el Nilo</span>
-        </div>
+        <div class="destino-desc">El Cairo, las Pirámides, crucero por el Nilo, Luxor y Aswan. La historia viva.</div>
+        <div class="destino-meta"><span class="destino-tag">🌙 13 noches</span><span class="destino-tag">✈️ Vuelo incluido</span><span class="destino-tag">🚢 Crucero por el Nilo</span></div>
       </div>
       <div class="destino-footer">
-        <div class="destino-price">
-          <strong>$999 <span>USD</span></strong>
-          + $399 USD imp.
-        </div>
-        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Egipto%20Faraónico" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
+        <div class="destino-price"><strong>$999 <span>USD</span></strong>+ $399 USD imp.</div>
+        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Egipto" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
 
-    <div class="destino-card fade-up destino-extra" style="display:none">
-      <div class="destino-img">
-        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80" alt="España y Francia — Fin de Año" loading="lazy">
-        <div class="destino-region">Europa</div>
-      </div>
+    <div class="destino-card destino-extra fade-up">
+      <div class="destino-img"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80" alt="España y Francia" loading="lazy"><div class="destino-region">Europa</div></div>
       <div class="destino-body">
         <div class="destino-name">España y Francia — Fin de Año</div>
-        <div class="destino-desc">Madrid, Burdeos, París y Barcelona. Recibe el Año Nuevo entre las luces de la Torre Eiffel.</div>
-        <div class="destino-meta">
-          <span class="destino-tag">🌙 11 días / 9 noches</span>
-          <span class="destino-tag">✈️ Vuelo incluido</span>
-          <span class="destino-tag">📅 Salida 25 dic</span>
-        </div>
+        <div class="destino-desc">Madrid, Burdeos, París y Barcelona. Recibe el Año Nuevo en Europa. Salida 25 dic.</div>
+        <div class="destino-meta"><span class="destino-tag">🌙 9 noches</span><span class="destino-tag">✈️ Vuelo incluido</span><span class="destino-tag">🎆 Fin de año</span></div>
       </div>
       <div class="destino-footer">
-        <div class="destino-price">
-          <strong>$1,989 <span>USD</span></strong>
-          + $989 USD imp.
-        </div>
-        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20España%20y%20Francia%20—%20Fin%20de%20Año" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
+        <div class="destino-price"><strong>$1,989 <span>USD</span></strong>+ $989 USD imp.</div>
+        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20España%20y%20Francia%20Fin%20de%20Año" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
 
-    <div class="destino-card fade-up destino-extra" style="display:none">
-      <div class="destino-img">
-        <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=600&q=80" alt="Estambul y Egipto — Fin de Año" loading="lazy">
-        <div class="destino-region">Europa/África</div>
-      </div>
+    <div class="destino-card destino-extra fade-up">
+      <div class="destino-img"><img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=600&q=80" alt="Estambul y Egipto" loading="lazy"><div class="destino-region">Europa/África</div></div>
       <div class="destino-body">
         <div class="destino-name">Estambul y Egipto — Fin de Año</div>
-        <div class="destino-desc">Estambul, El Cairo, Pirámides, Luxor y Aswan. Dos continentes y un crucero por el Nilo para cerrar el año.</div>
-        <div class="destino-meta">
-          <span class="destino-tag">🌙 13 días / 11 noches</span>
-          <span class="destino-tag">✈️ Vuelo incluido</span>
-          <span class="destino-tag">🚢 Crucero por el Nilo</span>
-        </div>
+        <div class="destino-desc">Estambul, El Cairo, Pirámides, crucero por el Nilo, Luxor y Aswan. Salida 21 dic.</div>
+        <div class="destino-meta"><span class="destino-tag">🌙 11 noches</span><span class="destino-tag">✈️ Vuelo incluido</span><span class="destino-tag">🚢 Crucero Nilo</span></div>
       </div>
       <div class="destino-footer">
-        <div class="destino-price">
-          <strong>$4,049 <span>USD</span></strong>
-          + $969 USD imp.
-        </div>
-        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Estambul%20y%20Egipto%20—%20Fin%20de%20Año" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
+        <div class="destino-price"><strong>$4,049 <span>USD</span></strong>+ $969 USD imp.</div>
+        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20Estambul%20y%20Egipto" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
 
-    <div class="destino-card fade-up destino-extra" style="display:none">
-      <div class="destino-img">
-        <img src="https://images.unsplash.com/photo-1513407030348-c983a97b98d8?w=600&q=80" alt="Corea y Japón — Fin de Año" loading="lazy">
-        <div class="destino-region">Asia</div>
-      </div>
+    <div class="destino-card destino-extra fade-up">
+      <div class="destino-img"><img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80" alt="Corea y Japón" loading="lazy"><div class="destino-region">Asia</div></div>
       <div class="destino-body">
         <div class="destino-name">Corea y Japón — Fin de Año</div>
-        <div class="destino-desc">Seúl, Busan, Kioto, Tokio y Osaka. Un gran tour de Año Nuevo entre dos culturas fascinantes de Asia.</div>
-        <div class="destino-meta">
-          <span class="destino-tag">🌙 20 días / 17 noches</span>
-          <span class="destino-tag">✈️ Vuelo incluido</span>
-          <span class="destino-tag">📅 Salida 19 dic</span>
-        </div>
+        <div class="destino-desc">Seúl, Busan, Kioto, Tokio, Nara y Osaka. Dos culturas, un viaje inolvidable. Salida 19 dic.</div>
+        <div class="destino-meta"><span class="destino-tag">🌙 17 noches</span><span class="destino-tag">✈️ Vuelo incluido</span><span class="destino-tag">🎆 Fin de año</span></div>
       </div>
       <div class="destino-footer">
-        <div class="destino-price">
-          <strong>$10,179 <span>USD</span></strong>
-          + $989 USD imp.
-        </div>
-        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Corea%20y%20Japón%20—%20Fin%20de%20Año" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
+        <div class="destino-price"><strong>$10,179 <span>USD</span></strong>+ $989 USD imp.</div>
+        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20Corea%20y%20Japón" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
 
-    <div class="destino-card fade-up destino-extra" style="display:none">
-      <div class="destino-img">
-        <img src="https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=600&q=80" alt="Costa Rica" loading="lazy">
-        <div class="destino-region">Latinoamérica</div>
-      </div>
+    <div class="destino-card destino-extra fade-up">
+      <div class="destino-img"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Costa Rica" loading="lazy"><div class="destino-region">Latinoamérica</div></div>
       <div class="destino-body">
         <div class="destino-name">Costa Rica</div>
-        <div class="destino-desc">San José, Arenal y Manuel Antonio. Volcanes, selva tropical y playas en plena naturaleza pura vida.</div>
-        <div class="destino-meta">
-          <span class="destino-tag">🌙 8 días / 7 noches</span>
-          <span class="destino-tag">✈️ Vuelo incluido</span>
-          <span class="destino-tag">🏖️ Todo incluido</span>
-        </div>
+        <div class="destino-desc">San José, volcán Arenal y Manuel Antonio. Naturaleza, aventura y playas tropicales.</div>
+        <div class="destino-meta"><span class="destino-tag">🌙 7 noches</span><span class="destino-tag">✈️ Vuelo incluido</span><span class="destino-tag">🌿 Todo incluido</span></div>
       </div>
       <div class="destino-footer">
-        <div class="destino-price">
-          <strong>$1,629 <span>USD</span></strong>
-          + $299 USD imp.
-        </div>
+        <div class="destino-price"><strong>$1,629 <span>USD</span></strong>+ $299 USD imp.</div>
         <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Costa%20Rica" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
 
-    <div class="destino-card fade-up destino-extra" style="display:none">
-      <div class="destino-img">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Punta Cana — Fin de Año" loading="lazy">
-        <div class="destino-region">Caribe</div>
-      </div>
+    <div class="destino-card destino-extra fade-up">
+      <div class="destino-img"><img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80" alt="Punta Cana Fin de Año" loading="lazy"><div class="destino-region">Caribe</div></div>
       <div class="destino-body">
         <div class="destino-name">Punta Cana — Fin de Año</div>
-        <div class="destino-desc">Punta Cana y Bávaro. Arena blanca, mar turquesa y todo incluido para despedir el año en el Caribe.</div>
-        <div class="destino-meta">
-          <span class="destino-tag">🌙 8 días / 7 noches</span>
-          <span class="destino-tag">✈️ Vuelo incluido</span>
-          <span class="destino-tag">🏖️ Todo incluido</span>
-        </div>
+        <div class="destino-desc">Punta Cana y Bávaro. Celebra el Año Nuevo en el Caribe con todo incluido.</div>
+        <div class="destino-meta"><span class="destino-tag">🌙 7 noches</span><span class="destino-tag">✈️ Vuelo incluido</span><span class="destino-tag">🎆 Fin de año</span></div>
       </div>
       <div class="destino-footer">
-        <div class="destino-price">
-          <strong>$1,879 <span>USD</span></strong>
-          + $399 USD imp.
-        </div>
-        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Punta%20Cana%20—%20Fin%20de%20Año" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
+        <div class="destino-price"><strong>$1,879 <span>USD</span></strong>+ $399 USD imp.</div>
+        <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20Punta%20Cana%20Fin%20de%20Año" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
 
-    <div class="destino-card fade-up destino-extra" style="display:none">
-      <div class="destino-img">
-        <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80" alt="Nueva York" loading="lazy">
-        <div class="destino-region">Norteamérica</div>
-      </div>
+    <div class="destino-card destino-extra fade-up">
+      <div class="destino-img"><img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600&q=80" alt="Nueva York" loading="lazy"><div class="destino-region">Norteamérica</div></div>
       <div class="destino-body">
         <div class="destino-name">Nueva York</div>
-        <div class="destino-desc">Manhattan, Times Square y Central Park. La ciudad que nunca duerme desde un hotel céntrico.</div>
-        <div class="destino-meta">
-          <span class="destino-tag">🌙 9 días / 8 noches</span>
-          <span class="destino-tag">✈️ Vuelo incluido</span>
-          <span class="destino-tag">🏨 Hotel céntrico</span>
-        </div>
+        <div class="destino-desc">Manhattan, Times Square, Central Park y Brooklyn. La ciudad que nunca duerme te espera.</div>
+        <div class="destino-meta"><span class="destino-tag">🌙 8 noches</span><span class="destino-tag">✈️ Vuelo incluido</span><span class="destino-tag">🏨 Hotel céntrico</span></div>
       </div>
       <div class="destino-footer">
-        <div class="destino-price">
-          <strong>$999 <span>USD</span></strong>
-          + $399 USD imp.
-        </div>
+        <div class="destino-price"><strong>$999 <span>USD</span></strong>+ $399 USD imp.</div>
         <a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20el%20paquete%20Nueva%20York" class="destino-btn" target="_blank" rel="noopener">Cotizar</a>
       </div>
     </div>
 
   </div>
 
-  <div style="text-align:center; margin-top: 44px;">
-    <button type="button" id="toggle-destinos" class="btn-primary" style="display:inline-flex; border:none; cursor:pointer; font-family:'Inter',sans-serif;" onclick="toggleDestinos()">Ver todos los destinos →</button>
+  <div style="text-align:center; margin-top:44px;">
+    <button id="toggle-btn" onclick="toggleDestinos()" style="background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:13px 32px;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s,color .2s;">
+      Ver todos los destinos →
+    </button>
   </div>
 </section>
 
-<!-- POR QUÉ NOSOTROS -->
-<section id="nosotros" class="section section-alt">
+<div class="gold-line"></div>
+
+<!-- POR QUÉ -->
+<section id="nosotros" class="section section-dark">
   <div class="section-header fade-up">
-    <div class="section-eyebrow">Por qué elegirnos</div>
-    <h2 class="section-title">Viaja con total confianza</h2>
-    <p class="section-sub">Contamos con todos los requisitos legales al corriente y más de mil viajeros satisfechos.</p>
+    <div class="eyebrow">Por qué elegirnos</div>
+    <h2 class="section-title">Viaja con total <em>confianza</em></h2>
+    <p class="section-sub">Agencia legalmente registrada con todos los permisos al corriente y cientos de viajeros satisfechos.</p>
   </div>
   <div class="features-grid">
     <div class="feature-card fade-up">
       <div class="feature-icon">✅</div>
       <div class="feature-title">Agencia legalmente registrada</div>
-      <div class="feature-desc">Contamos con todos los permisos y requisitos legales vigentes. Tu inversión está protegida.</div>
+      <div class="feature-desc">Todos los permisos y requisitos legales vigentes. Tu inversión está protegida desde el primer momento.</div>
     </div>
     <div class="feature-card fade-up">
       <div class="feature-icon">🎯</div>
       <div class="feature-title">Viajes a tu medida</div>
-      <div class="feature-desc">Diseñamos cada itinerario según tus fechas, presupuesto y preferencias. Nada genérico.</div>
+      <div class="feature-desc">Diseñamos cada itinerario según tus fechas, presupuesto y preferencias. Nada genérico, todo personalizado.</div>
     </div>
     <div class="feature-card fade-up">
       <div class="feature-icon">📞</div>
-      <div class="feature-title">Soporte 24/7 durante el viaje</div>
-      <div class="feature-desc">Tienes un contacto directo con nosotros desde que sales hasta que regresas a casa.</div>
+      <div class="feature-title">Soporte 24/7 en viaje</div>
+      <div class="feature-desc">Tienes contacto directo con nosotros desde que sales hasta que regresas. No viajas solo.</div>
     </div>
     <div class="feature-card fade-up">
       <div class="feature-icon">💳</div>
-      <div class="feature-title">Reserva con anticipación</div>
-      <div class="feature-desc">Asegura tu lugar con un depósito inicial. Precios garantizados desde el momento de tu reserva.</div>
+      <div class="feature-title">Reserva con anticipo</div>
+      <div class="feature-desc">Asegura tu lugar con un depósito inicial. Precios garantizados desde el momento de tu reservación.</div>
     </div>
   </div>
 </section>
 
+<div class="gold-line"></div>
+
 <!-- OPINIONES -->
-<section id="opiniones" class="section">
+<section id="opiniones" class="section section-navy">
   <div class="section-header fade-up">
-    <div class="section-eyebrow">Lo que dicen nuestros viajeros</div>
-    <h2 class="section-title">5.0 en Google ⭐</h2>
-    <p class="section-sub">Opiniones reales de clientes verificados.</p>
+    <div class="eyebrow">Nuestros viajeros</div>
+    <h2 class="section-title">5.0 en Google <em>⭐</em></h2>
+    <p class="section-sub">Opiniones reales de clientes verificados que ya vivieron la experiencia.</p>
   </div>
   <div class="reviews-grid">
     <div class="review-card fade-up">
@@ -897,10 +730,7 @@
       <div class="review-text">"Excelente si quieres viajar sin preocupaciones, volvería a contratar con ellos. Todo estuvo perfecto desde el primer día."</div>
       <div class="review-author">
         <div class="review-avatar">MR</div>
-        <div>
-          <div class="review-name">María R.</div>
-          <div class="review-date">Google · Hace 2 horas</div>
-        </div>
+        <div><div class="review-name">María R.</div><div class="review-date">Google · Hace 2 horas</div></div>
       </div>
     </div>
     <div class="review-card fade-up">
@@ -908,98 +738,70 @@
       <div class="review-text">"Excelente servicio, muy recomendable. Las personas muy amables y siempre atentas a cualquier duda que tuvimos."</div>
       <div class="review-author">
         <div class="review-avatar">CL</div>
-        <div>
-          <div class="review-name">Carlos L.</div>
-          <div class="review-date">Google · Hace 2 horas</div>
-        </div>
+        <div><div class="review-name">Carlos L.</div><div class="review-date">Google · Hace 2 horas</div></div>
       </div>
     </div>
     <div class="review-card fade-up">
       <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Todo muy claro y transparente. Cuentan con todos los requisitos legales al corriente. Quedé muy satisfecha, cumplieron todo lo que prometieron."</div>
+      <div class="review-text">"Todo muy claro y transparente. Cuentan con todos los requisitos legales al corriente. Quedé muy satisfecha, cumplieron todo lo prometido."</div>
       <div class="review-author">
         <div class="review-avatar">AP</div>
-        <div>
-          <div class="review-name">Ana P.</div>
-          <div class="review-date">Google · Hace 1 día</div>
-        </div>
+        <div><div class="review-name">Ana P.</div><div class="review-date">Google · Hace 1 día</div></div>
       </div>
     </div>
   </div>
 </section>
 
+<div class="gold-line"></div>
+
 <!-- CONTACTO -->
-<section id="contacto" class="section section-alt">
+<section id="contacto" class="section section-dark">
   <div class="section-header fade-up">
-    <div class="section-eyebrow">Contáctanos</div>
-    <h2 class="section-title">¿Listo para viajar?</h2>
+    <div class="eyebrow">Contáctanos</div>
+    <h2 class="section-title">¿Listo para <em>viajar?</em></h2>
     <p class="section-sub">Escríbenos y recibe tu cotización personalizada en menos de 24 horas.</p>
   </div>
   <div class="contact-wrap">
     <div class="contact-info fade-up">
       <h3>Hablemos de tu próxima aventura</h3>
       <p>Respondemos por WhatsApp, teléfono o correo. Elige el canal que prefieras.</p>
-
       <div class="contact-item">
         <div class="contact-icon">📱</div>
-        <div>
-          <div class="contact-label">WhatsApp</div>
-          <div class="contact-val"><a href="https://wa.me/5215562513777" target="_blank" rel="noopener">+52 1 55 6251 3777</a></div>
-        </div>
+        <div><div class="contact-label">WhatsApp</div><div class="contact-val"><a href="https://wa.me/5215562513777" target="_blank">+52 1 55 6251 3777</a></div></div>
       </div>
       <div class="contact-item">
         <div class="contact-icon">📞</div>
-        <div>
-          <div class="contact-label">Teléfono</div>
-          <div class="contact-val"><a href="tel:5548602104">55 4860 2104</a></div>
-        </div>
+        <div><div class="contact-label">Teléfono</div><div class="contact-val"><a href="tel:5548602104">55 4860 2104</a></div></div>
       </div>
       <div class="contact-item">
         <div class="contact-icon">✉️</div>
-        <div>
-          <div class="contact-label">Correo</div>
-          <div class="contact-val"><a href="mailto:brigida.espinosa@exceltours.com.mx">brigida.espinosa@exceltours.com.mx</a></div>
-        </div>
+        <div><div class="contact-label">Correo</div><div class="contact-val"><a href="mailto:brigida.espinosa@exceltours.com.mx">brigida.espinosa@exceltours.com.mx</a></div></div>
       </div>
       <div class="contact-item">
         <div class="contact-icon">📍</div>
-        <div>
-          <div class="contact-label">Dirección</div>
-          <div class="contact-val">Av. Yohualtepetl Mz21 Lt17, Fracc. Acozac, Ixtapaluca, CDMX</div>
-        </div>
+        <div><div class="contact-label">Dirección</div><div class="contact-val">Av. Yohualtepetl Mz21 Lt17, Fracc. Acozac, Ixtapaluca, CDMX</div></div>
       </div>
     </div>
-
     <form class="fade-up" onsubmit="handleForm(event)">
       <div class="form-row">
-        <div>
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" placeholder="Tu nombre" required>
-        </div>
-        <div>
-          <label for="telefono">Teléfono / WhatsApp</label>
-          <input type="tel" id="telefono" placeholder="55 1234 5678" required>
-        </div>
+        <div><label for="nombre">Nombre</label><input type="text" id="nombre" placeholder="Tu nombre" required></div>
+        <div><label for="telefono">Teléfono / WhatsApp</label><input type="tel" id="telefono" placeholder="55 1234 5678" required></div>
       </div>
       <div>
         <label for="destino">Destino de interés</label>
         <select id="destino">
           <option value="">Selecciona un destino</option>
-          <option>Europa Mágica</option>
-          <option>Japón 2026</option>
-          <option>Punta Cana y Santo Domingo</option>
-          <option>Colombia Multicultural</option>
-          <option>Turquía con crucero en Grecia</option>
-          <option>Egipto Faraónico</option>
+          <option>Europa Mágica</option><option>Japón 2026</option><option>Punta Cana y Santo Domingo</option>
+          <option>Colombia Multicultural</option><option>Turquía con Crucero en Grecia</option>
+          <option>Egipto Faraónico</option><option>España y Francia — Fin de Año</option>
+          <option>Estambul y Egipto — Fin de Año</option><option>Corea y Japón — Fin de Año</option>
+          <option>Costa Rica</option><option>Punta Cana — Fin de Año</option><option>Nueva York</option>
           <option>Otro destino</option>
         </select>
       </div>
-      <div>
-        <label for="mensaje">Mensaje (opcional)</label>
-        <textarea id="mensaje" placeholder="Cuéntanos cuántas personas viajan, fecha aproximada o cualquier duda…"></textarea>
-      </div>
-      <button type="submit" class="btn-submit" id="submit-btn">Enviar por WhatsApp →</button>
-      <p style="font-size:12px; color:#6B7A8D; margin-top:4px;">Al enviar, serás redirigido a WhatsApp con tu consulta lista.</p>
+      <div><label for="mensaje">Mensaje (opcional)</label><textarea id="mensaje" placeholder="¿Cuántas personas viajan? ¿Fecha aproximada? ¿Alguna duda?"></textarea></div>
+      <button type="submit" class="btn-submit">Enviar por WhatsApp →</button>
+      <p class="form-note">Al enviar serás redirigido a WhatsApp con tu consulta lista.</p>
     </form>
   </div>
 </section>
@@ -1007,37 +809,25 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
-    <div class="footer-brand">
-      <div class="footer-logo">
+    <div>
+      <a class="footer-logo" href="#">
         <div class="footer-logo-mark">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="2" y1="12" x2="22" y2="12"/>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4973B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
           </svg>
         </div>
         <div class="footer-logo-text">Walk the World <small>Agencia de viajes</small></div>
-      </div>
+      </a>
       <p class="footer-desc">Agencia de viajes mexicana creando experiencias inolvidables desde Ciudad de México hacia el mundo.</p>
     </div>
     <div class="footer-col">
       <h4>Destinos</h4>
-      <ul>
-        <li><a href="#">Europa</a></li>
-        <li><a href="#">Japón</a></li>
-        <li><a href="#">Caribe</a></li>
-        <li><a href="#">Colombia</a></li>
-        <li><a href="#">Turquía</a></li>
-      </ul>
+      <ul><li><a href="#">Europa</a></li><li><a href="#">Japón</a></li><li><a href="#">Caribe</a></li><li><a href="#">Colombia</a></li><li><a href="#">Turquía</a></li></ul>
     </div>
     <div class="footer-col">
       <h4>Agencia</h4>
-      <ul>
-        <li><a href="#">Sobre nosotros</a></li>
-        <li><a href="#">Opiniones</a></li>
-        <li><a href="#">Trámite de visa</a></li>
-        <li><a href="#">Blog de viajes</a></li>
-      </ul>
+      <ul><li><a href="#">Sobre nosotros</a></li><li><a href="#">Opiniones</a></li><li><a href="#">Trámite de visa</a></li><li><a href="#">Blog de viajes</a></li></ul>
     </div>
     <div class="footer-col">
       <h4>Contacto</h4>
@@ -1045,60 +835,66 @@
         <li><a href="https://wa.me/5215562513777">WhatsApp</a></li>
         <li><a href="tel:5548602104">55 4860 2104</a></li>
         <li><a href="mailto:brigida.espinosa@exceltours.com.mx">Correo</a></li>
-        <li><a href="https://www.facebook.com/p/Walk-the-World-100083583429320/" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.facebook.com/p/Walk-the-World-100083583429320/" target="_blank">Facebook</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <div class="footer-copy">© 2026 Walk the World · Agencia de viajes · Ixtapaluca, México</div>
     <div class="footer-socials">
-      <a href="https://www.facebook.com/p/Walk-the-World-100083583429320/" target="_blank" rel="noopener" aria-label="Facebook">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      <a href="https://www.facebook.com/p/Walk-the-World-100083583429320/" target="_blank" aria-label="Facebook">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4973B"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
       </a>
-      <a href="https://www.instagram.com/walkthaworld/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      <a href="https://www.instagram.com/walkthaworld/" target="_blank" aria-label="Instagram">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C4973B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
       </a>
-      <a href="https://wa.me/5215562513777" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.554 4.103 1.524 5.83L0 24l6.338-1.499A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.007-1.371l-.36-.213-3.727.881.895-3.636-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+      <a href="https://wa.me/5215562513777" target="_blank" aria-label="WhatsApp">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4973B"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.554 4.103 1.524 5.83L0 24l6.338-1.499A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.007-1.371l-.36-.213-3.727.881.895-3.636-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
       </a>
     </div>
   </div>
 </footer>
 
-<!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20información%20sobre%20paquetes%20de%20viaje" class="wa-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+<!-- WA FLOAT -->
+<a href="https://wa.me/5215562513777?text=Hola%2C%20me%20interesa%20información%20sobre%20paquetes%20de%20viaje" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.554 4.103 1.524 5.83L0 24l6.338-1.499A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.007-1.371l-.36-.213-3.727.881.895-3.636-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
   <div class="wa-tooltip">¡Escríbenos!</div>
 </a>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  function toggleDestinos() {
-    const btn = document.getElementById('toggle-destinos');
-    const extras = document.querySelectorAll('.destino-extra');
-    const oculto = extras.length && extras[0].style.display === 'none';
-    extras.forEach(card => {
-      card.style.display = oculto ? 'block' : 'none';
-      if (oculto) card.classList.add('visible');
-    });
-    btn.textContent = oculto ? 'Ver menos ↑' : 'Ver todos los destinos →';
-  }
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  const open = links.style.display === 'flex';
+  links.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:absolute;top:66px;left:0;right:0;background:rgba(8,14,26,0.98);padding:20px 5%;gap:20px;border-bottom:1px solid rgba(196,151,59,0.2);';
+}
 
-  function handleForm(e) {
-    e.preventDefault();
-    const nombre = document.getElementById('nombre').value;
-    const telefono = document.getElementById('telefono').value;
-    const destino = document.getElementById('destino').value;
-    const mensaje = document.getElementById('mensaje').value;
-    const text = encodeURIComponent(
-      `Hola, soy ${nombre}.\nTeléfono: ${telefono}\nDestino de interés: ${destino || 'Por definir'}\n${mensaje ? 'Mensaje: ' + mensaje : ''}`
-    );
-    window.open(`https://wa.me/5215562513777?text=${text}`, '_blank');
-  }
+let showing = false;
+function toggleDestinos() {
+  showing = !showing;
+  const extras = document.querySelectorAll('.destino-extra');
+  const btn = document.getElementById('toggle-btn');
+  extras.forEach(el => {
+    el.style.display = showing ? 'block' : 'none';
+    if (showing) { el.classList.remove('visible'); setTimeout(() => el.classList.add('visible'), 50); }
+  });
+  btn.textContent = showing ? 'Ver menos ↑' : 'Ver todos los destinos →';
+  if (!showing) document.getElementById('destinos').scrollIntoView({ behavior: 'smooth' });
+}
+
+function handleForm(e) {
+  e.preventDefault();
+  const nombre = document.getElementById('nombre').value;
+  const telefono = document.getElementById('telefono').value;
+  const destino = document.getElementById('destino').value;
+  const mensaje = document.getElementById('mensaje').value;
+  const text = encodeURIComponent(`Hola, soy ${nombre}.\nTeléfono: ${telefono}\nDestino de interés: ${destino || 'Por definir'}${mensaje ? '\nMensaje: ' + mensaje : ''}`);
+  window.open(`https://wa.me/5215562513777?text=${text}`, '_blank');
+}
 </script>
 </body>
 </html>
